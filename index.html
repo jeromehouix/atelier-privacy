@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atelier — Politique de confidentialité</title>
+<title>Atelier — Privacy Policy</title>
 <style>
   :root { color-scheme: light dark; }
   body {
@@ -18,6 +18,8 @@
   @media (prefers-color-scheme: dark) {
     body { color: #f2f2f7; background: #1c1c1e; }
     a { color: #6ea8fe; }
+    .lang-switch button { border-color: rgba(255,255,255,0.25); color: #f2f2f7; }
+    .lang-switch button[aria-current="true"] { background: #2c2c2e; }
   }
   h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
   h2 { font-size: 1.15rem; margin-top: 2.25rem; }
@@ -26,9 +28,30 @@
   li { margin-bottom: 0.4rem; }
   a { color: #007aff; }
   .contact { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(128,128,128,0.3); }
+  .lang-switch { display: flex; gap: 0.5rem; justify-content: flex-end; margin-bottom: 0.5rem; }
+  .lang-switch button {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(128,128,128,0.4);
+    background: transparent;
+    color: #1c1c1e;
+    cursor: pointer;
+  }
+  .lang-switch button[aria-current="true"] { background: #f2f2f7; font-weight: 600; }
+  [data-lang-content] { display: none; }
+  [data-lang-content].active { display: block; }
 </style>
 </head>
 <body>
+
+<nav class="lang-switch">
+  <button type="button" data-set-lang="fr" aria-current="true">Français</button>
+  <button type="button" data-set-lang="en" aria-current="false">English</button>
+</nav>
+
+<div data-lang-content="fr" class="active">
 
 <h1>Politique de confidentialité — Atelier</h1>
 <p class="updated">Dernière mise à jour : 15 août 2026</p>
@@ -114,6 +137,131 @@
     <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
   </p>
 </div>
+
+</div>
+
+<div data-lang-content="en">
+
+<h1>Privacy Policy — Atelier</h1>
+<p class="updated">Last updated: August 15, 2026</p>
+
+<p>
+  Atelier is a drawing and animation app. This page explains what data the app
+  uses and how.
+</p>
+
+<p>
+  Publisher: Jerome Houix — contact:
+  <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>.
+</p>
+
+<h2>What stays on your device only</h2>
+<p>
+  Your drawings, notebooks and projects are stored locally on your device.
+  Camera and photo library access is used only to import photos or images into a
+  notebook; this content is never transmitted to third parties or used for
+  advertising purposes. Atelier contains no advertising tracker and does not sell
+  any data.
+</p>
+
+<h2>Google account (optional sign-in)</h2>
+<p>
+  If you choose to sign in with a Google account, Atelier receives your email
+  address and account identifier through Google Sign-In, in order to link your
+  notebook to your account and enable synchronization across devices. This
+  sign-in is optional: the app works without an account, fully offline and
+  local.
+</p>
+
+<h2>Content synchronization (when signed in)</h2>
+<p>
+  When an account is linked, the content of your notebooks (drawings and
+  imported images) is synchronized to your own Google Drive, so it is available
+  on your other devices and protected against data loss. Atelier does not host
+  this content on infrastructure it owns: it stays stored in your Google
+  account, under your control. This content is never shared with third parties,
+  nor used for commercial or advertising purposes.
+</p>
+
+<h2>Third-party content (reference search)</h2>
+<p>
+  Searching for references in the app may display Pexels photos (Pexels
+  licence, free of charge) and artworks from the Metropolitan Museum of Art
+  (public domain / CC0, under that museum's Open Access program). Searching for
+  clips in the montage studio may display Pexels videos (same licence). These
+  searches only send the typed search terms, with no account data, to the
+  Pexels and Metropolitan Museum of Art services.
+</p>
+
+<h2>Export and sharing</h2>
+<p>
+  Atelier does not publish or share your content outside the app
+  automatically. Exporting to PDF, image, or an .atelier package is an action
+  you trigger yourself, and the resulting file stays under your control.
+</p>
+
+<h2>What Atelier does not do</h2>
+<ul>
+  <li>No advertising tracking or profiling</li>
+  <li>No selling or sharing of data with third parties for marketing purposes</li>
+  <li>No data collection beyond what is described above</li>
+</ul>
+
+<h2>Your rights</h2>
+<p>
+  You can delete a notebook, or all of your data, at any time from within the
+  app; when a notebook is synchronized, this deletion also removes the
+  corresponding file from your Google Drive. You can also revoke Atelier's
+  access to your Google account at any time from your
+  <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google account settings</a>.
+  To exercise a right of access, rectification, or for any other question about
+  your data, you can contact us at the address below.
+</p>
+
+<div class="contact">
+  <h2 style="margin-top:0">Contact</h2>
+  <p>
+    For any question about this privacy policy or your data:<br>
+    <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
+  </p>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'atelier-privacy-lang';
+  var buttons = document.querySelectorAll('[data-set-lang]');
+  var panels = document.querySelectorAll('[data-lang-content]');
+
+  function applyLang(lang) {
+    panels.forEach(function (panel) {
+      panel.classList.toggle('active', panel.getAttribute('data-lang-content') === lang);
+    });
+    buttons.forEach(function (button) {
+      var isCurrent = button.getAttribute('data-set-lang') === lang;
+      button.setAttribute('aria-current', String(isCurrent));
+    });
+    document.documentElement.lang = lang;
+    document.title = lang === 'en' ? 'Atelier — Privacy Policy' : 'Atelier — Politique de confidentialité';
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var lang = button.getAttribute('data-set-lang');
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      applyLang(lang);
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  if (!saved) {
+    saved = (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  }
+  applyLang(saved);
+})();
+</script>
 
 </body>
 </html>
