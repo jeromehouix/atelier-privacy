@@ -3,263 +3,808 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atelier — Privacy Policy</title>
+<title>Atelier</title>
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 2.5rem 1.25rem 4rem;
-    line-height: 1.6;
-    color: #1c1c1e;
-    background: #fff;
+  :root {
+    color-scheme: light dark;
+    --accent: #4F7CA8;
+    --accent-ink: #3A5E80;
+    --shell: #F3F0EA;
+    --on-shell: #2A2724;
+    --on-shell-muted: #6B655D;
+    --card: #FFFCF7;
+    --on-card: #2A2724;
+    --card-border: rgba(42,39,36,0.10);
+    --canvas: #F7F4EF;
+    --focus-ring: #4F7CA8;
   }
+
   @media (prefers-color-scheme: dark) {
-    body { color: #f2f2f7; background: #1c1c1e; }
-    a { color: #6ea8fe; }
-    .lang-switch button { border-color: rgba(255,255,255,0.25); color: #f2f2f7; }
-    .lang-switch button[aria-current="true"] { background: #2c2c2e; }
+    :root:not([data-theme="light"]) {
+      --accent: #E27C50;
+      --accent-ink: #F0A17C;
+      --shell: #3A322C;
+      --on-shell: #F2EAE2;
+      --on-shell-muted: #C9BFB4;
+      --card: #453B33;
+      --on-card: #F2EAE2;
+      --card-border: rgba(242,234,226,0.12);
+      --canvas: #4E443C;
+      --focus-ring: #F0A17C;
+    }
   }
-  h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
-  h2 { font-size: 1.15rem; margin-top: 2.25rem; }
-  .updated { color: #8e8e93; font-size: 0.9rem; margin-bottom: 2rem; }
-  ul { padding-left: 1.25rem; }
-  li { margin-bottom: 0.4rem; }
-  a { color: #007aff; }
-  .contact { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(128,128,128,0.3); }
-  .lang-switch { display: flex; gap: 0.5rem; justify-content: flex-end; margin-bottom: 0.5rem; }
+
+  :root[data-theme="dark"] {
+    --accent: #E27C50;
+    --accent-ink: #F0A17C;
+    --shell: #3A322C;
+    --on-shell: #F2EAE2;
+    --on-shell-muted: #C9BFB4;
+    --card: #453B33;
+    --on-card: #F2EAE2;
+    --card-border: rgba(242,234,226,0.12);
+    --canvas: #4E443C;
+    --focus-ring: #F0A17C;
+  }
+
+  * { box-sizing: border-box; }
+
+  @font-face {
+    font-family: 'Kalam';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: local('Kalam Bold'), local('Kalam-Bold');
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--on-shell);
+    background: var(--shell);
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4.5rem;
+  }
+
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    flex: none;
+  }
+
+  .brand-name {
+    font-family: 'Kalam', -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.01em;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 0.4rem;
+  }
   .lang-switch button {
     font: inherit;
-    font-size: 0.85rem;
-    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+    padding: 0.32rem 0.7rem;
     border-radius: 999px;
-    border: 1px solid rgba(128,128,128,0.4);
+    border: 1px solid var(--card-border);
     background: transparent;
-    color: #1c1c1e;
+    color: var(--on-shell-muted);
     cursor: pointer;
   }
-  .lang-switch button[aria-current="true"] { background: #f2f2f7; font-weight: 600; }
+  .lang-switch button[aria-current="true"] {
+    background: var(--card);
+    color: var(--on-card);
+    border-color: var(--card-border);
+    font-weight: 600;
+  }
+
+  nav.tabs {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 2.25rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+  nav.tabs button {
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.7rem 0.2rem;
+    margin-right: 1.4rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--on-shell-muted);
+    cursor: pointer;
+  }
+  nav.tabs button[aria-selected="true"] {
+    color: var(--on-shell);
+    border-bottom-color: var(--accent);
+  }
+
+  [data-tab-panel] { display: none; }
+  [data-tab-panel].active { display: block; }
   [data-lang-content] { display: none; }
   [data-lang-content].active { display: block; }
+
+  h1 { font-size: 1.5rem; margin: 0 0 0.3rem; text-wrap: balance; }
+  h2 { font-size: 1.1rem; margin-top: 2.1rem; margin-bottom: 0.6rem; text-wrap: balance; }
+  p { margin: 0 0 1rem; max-width: 62ch; }
+  .updated { color: var(--on-shell-muted); font-size: 0.88rem; margin-bottom: 1.75rem; }
+
+  ul { padding-left: 1.2rem; margin: 0 0 1rem; }
+  li { margin-bottom: 0.4rem; }
+
+  .contact {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  /* --- Ressources tab --- */
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: var(--on-shell-muted);
+    max-width: 46ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .studio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .studio-card {
+    display: block;
+    background: var(--card);
+    color: var(--on-card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.1rem 1.1rem 1.2rem;
+    box-shadow: 0 6px 18px -10px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.10);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .studio-card:hover, .studio-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -12px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .studio-card:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .studio-link-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-ink);
+    margin-top: 0.6rem;
+  }
+
+  .studio-icon {
+    width: 100%;
+    height: 64px;
+    margin-bottom: 0.7rem;
+  }
+
+  .studio-name {
+    font-weight: 700;
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .studio-desc {
+    font-size: 0.86rem;
+    color: var(--on-card);
+    opacity: 0.72;
+    margin: 0;
+    max-width: none;
+  }
+
+  .gestures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .gesture h3 {
+    font-size: 0.95rem;
+    margin: 0 0 0.35rem;
+    color: var(--accent-ink);
+  }
+  .gesture p {
+    font-size: 0.9rem;
+    margin: 0;
+    max-width: none;
+    color: var(--on-shell-muted);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #FFFCF7;
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
+<div class="page">
 
-<nav class="lang-switch">
-  <button type="button" data-set-lang="fr" aria-current="true">Français</button>
-  <button type="button" data-set-lang="en" aria-current="false">English</button>
+<header class="top">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 30 Q13 8 20 8 Q27 8 27 16 Q27 22 20 22" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <line x1="8" y1="30" x2="13" y2="15" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="20" y1="22" x2="27" y2="16" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+      <circle cx="8" cy="30" r="2.6" fill="var(--canvas)" stroke="var(--accent)" stroke-width="1.4"/>
+      <rect x="17.5" y="19.5" width="5" height="5" fill="var(--accent)"/>
+    </svg>
+    <span class="brand-name">Atelier</span>
+  </div>
+  <nav class="lang-switch">
+    <button type="button" data-set-lang="fr" aria-current="true">Français</button>
+    <button type="button" data-set-lang="en" aria-current="false">English</button>
+  </nav>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button type="button" role="tab" data-set-tab="resources" aria-selected="true" data-lang-content="fr">Ressources</button>
+  <button type="button" role="tab" data-set-tab="resources" aria-selected="true" data-lang-content="en">Resources</button>
+  <button type="button" role="tab" data-set-tab="privacy" aria-selected="false" data-lang-content="fr">Confidentialité</button>
+  <button type="button" role="tab" data-set-tab="privacy" aria-selected="false" data-lang-content="en">Privacy</button>
 </nav>
 
-<div data-lang-content="fr" class="active">
+<!-- ============ RESOURCES TAB ============ -->
+<section data-tab-panel="resources" class="active">
 
-<h1>Politique de confidentialité — Atelier</h1>
-<p class="updated">Dernière mise à jour : 15 août 2026</p>
+  <div data-lang-content="fr" class="active">
+    <h1>Un atelier de création numérique</h1>
+    <p class="hero-tagline">
+      Dessiner, animer, composer : sept studios réunis dans un même carnet,
+      pour suivre un travail du premier trait à la pièce finie.
+    </p>
 
-<p>
-  Atelier est une application de dessin et d'animation. Cette page explique quelles
-  données sont utilisées par l'application et comment elles le sont.
-</p>
+    <div class="studio-grid">
+      <a class="studio-card" href="tutorials/dessin.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <line x1="18" y1="47" x2="30" y2="12" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+          <line x1="84" y1="17" x2="70" y2="52" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+          <path d="M18 47 C30 12 70 52 84 17" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <circle cx="18" cy="47" r="3.4" fill="var(--card)" stroke="var(--accent)" stroke-width="1.4"/>
+          <circle cx="84" cy="17" r="3.4" fill="var(--card)" stroke="var(--accent)" stroke-width="1.4"/>
+          <rect x="27.5" y="9.5" width="5" height="5" fill="var(--accent)"/>
+          <rect x="67.5" y="49.5" width="5" height="5" fill="var(--accent)"/>
+        </svg>
+        <h2 class="studio-name">Dessin</h2>
+        <p class="studio-desc">Brosses crayon, encre, feutre, pastel, gravure. Pression du stylet, calques, palm rejection.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<p>
-  Éditeur : Jerome Houix — contact :
-  <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>.
-</p>
+      <a class="studio-card" href="tutorials/vectoriel.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="12" y="8" width="58" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+          <rect x="12" y="38" width="26" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+          <rect x="44" y="38" width="26" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+        </svg>
+        <h2 class="studio-name">Vectoriel</h2>
+        <p class="studio-desc">Aplats, silhouettes, logos, pictogrammes. Formes propres et opérations booléennes.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<h2>Ce qui reste uniquement sur votre appareil</h2>
-<p>
-  Vos dessins, carnets et projets sont stockés localement sur votre appareil.
-  L'accès à la caméra et à la photothèque sert uniquement à importer des photos ou
-  des images dans un carnet ; ces contenus ne sont jamais transmis à des tiers ni
-  utilisés à des fins publicitaires. Atelier ne contient aucun traceur publicitaire
-  et ne revend aucune donnée.
-</p>
+      <a class="studio-card" href="tutorials/pixel-art.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <g fill="var(--accent)">
+            <rect x="38" y="8" width="9" height="9"/><rect x="47" y="8" width="9" height="9"/>
+            <rect x="29" y="17" width="9" height="9"/><rect x="38" y="17" width="9" height="9" fill-opacity="0.35"/><rect x="47" y="17" width="9" height="9" fill-opacity="0.35"/><rect x="56" y="17" width="9" height="9"/>
+            <rect x="29" y="26" width="9" height="9"/><rect x="38" y="26" width="9" height="9"/><rect x="47" y="26" width="9" height="9"/><rect x="56" y="26" width="9" height="9"/>
+            <rect x="38" y="35" width="9" height="9"/><rect x="47" y="35" width="9" height="9"/>
+            <rect x="29" y="44" width="9" height="9"/><rect x="56" y="44" width="9" height="9"/>
+            <rect x="20" y="53" width="9" height="9"/><rect x="65" y="53" width="9" height="9"/>
+          </g>
+        </svg>
+        <h2 class="studio-name">Pixel art</h2>
+        <p class="studio-desc">Grille de cellules, outils dédiés, résolution et palette maîtrisées.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<h2>Compte Google (connexion facultative)</h2>
-<p>
-  Si vous choisissez de vous connecter avec un compte Google, Atelier reçoit votre
-  adresse e-mail et votre identifiant de compte via Google Sign-In, afin d'associer
-  votre carnet à votre compte et de permettre la synchronisation entre appareils.
-  Cette connexion est facultative : l'application fonctionne sans compte, en local
-  uniquement.
-</p>
+      <a class="studio-card" href="tutorials/generatif.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <g fill="var(--accent)">
+            <path d="M50 6 L58 20 L42 20 Z" fill-opacity="0.85"/>
+            <path d="M34 32 L42 20 L26 20 Z" fill-opacity="0.6"/>
+            <path d="M66 32 L74 20 L58 20 Z" fill-opacity="0.6"/>
+            <path d="M50 32 L58 20 L42 20 Z" fill-opacity="0.35"/>
+            <path d="M18 58 L26 46 L10 46 Z" fill-opacity="0.45"/>
+            <path d="M50 58 L58 46 L42 46 Z" fill-opacity="0.45"/>
+            <path d="M82 58 L90 46 L74 46 Z" fill-opacity="0.45"/>
+          </g>
+        </svg>
+        <h2 class="studio-name">Génératif</h2>
+        <p class="studio-desc">Fractales, motifs, formes procédurales. Une amorce, une graine, une composition.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<h2>Synchronisation du contenu (si connecté)</h2>
-<p>
-  Lorsqu'un compte est associé, le contenu de vos carnets (dessins et images
-  importées) est synchronisé vers votre propre Google Drive, afin d'être
-  disponible sur vos autres appareils et d'éviter la perte de données. Atelier
-  n'héberge pas ce contenu sur une infrastructure qui lui appartient : il reste
-  stocké dans votre compte Google, sous votre contrôle. Ce contenu n'est ni
-  partagé avec des tiers, ni utilisé à des fins commerciales ou publicitaires.
-</p>
+      <a class="studio-card" href="tutorials/montage.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="10" y="26" width="80" height="14" rx="4" fill="var(--accent)" fill-opacity="0.18"/>
+          <rect x="14" y="28" width="22" height="10" rx="3" fill="var(--accent)" fill-opacity="0.55"/>
+          <rect x="40" y="28" width="18" height="10" rx="3" fill="var(--accent)" fill-opacity="0.75"/>
+          <rect x="62" y="28" width="14" height="10" rx="3" fill="var(--accent)"/>
+          <line x1="58" y1="14" x2="58" y2="50" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M54 14 L62 14 L58 22 Z" fill="var(--accent)"/>
+        </svg>
+        <h2 class="studio-name">Montage</h2>
+        <p class="studio-desc">Assemblage de plans, bande-son, export — la table de montage du carnet.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<h2>Contenus tiers (recherche de références)</h2>
-<p>
-  La recherche de références dans l'application peut afficher des photos Pexels
-  (licence Pexels, gratuite) et des œuvres du Metropolitan Museum of Art (domaine
-  public / CC0, programme Open Access de ce musée). La recherche de plans dans le
-  montage peut afficher des vidéos Pexels (même licence). Ces recherches
-  transmettent uniquement les termes saisis, sans donnée de compte, aux services
-  Pexels et Metropolitan Museum of Art.
-</p>
+      <a class="studio-card" href="tutorials/animation.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <circle cx="30" cy="34" r="17" fill="var(--accent)" fill-opacity="0.16"/>
+          <circle cx="42" cy="30" r="17" fill="var(--accent)" fill-opacity="0.38"/>
+          <circle cx="56" cy="34" r="17" fill="var(--accent)" fill-opacity="0.92"/>
+        </svg>
+        <h2 class="studio-name">Animation</h2>
+        <p class="studio-desc">Image par image, onion skin, FPS variable, rig 2D pour les poses.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
 
-<h2>Export et partage</h2>
-<p>
-  Atelier ne publie ni ne partage automatiquement votre contenu en dehors de
-  l'application. L'export en PDF, en image ou en paquet .atelier est une action
-  que vous déclenchez vous-même, et le fichier obtenu reste sous votre contrôle.
-</p>
+      <a class="studio-card" href="tutorials/bd.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="12" y="8" width="76" height="22" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+          <rect x="12" y="36" width="34" height="20" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+          <rect x="54" y="36" width="34" height="20" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+        </svg>
+        <h2 class="studio-name">BD</h2>
+        <p class="studio-desc">Planches multi-cases, bulles, onomatopées, lignes de vitesse.</p>
+      <span class="studio-link-hint">Tutoriel &rarr;</span>
+      </a>
+    </div>
 
-<h2>Ce qu'Atelier ne fait pas</h2>
-<ul>
-  <li>Pas de suivi publicitaire ni de profilage</li>
-  <li>Pas de revente ou de partage de données avec des tiers à des fins marketing</li>
-  <li>Pas de collecte de données au-delà de ce qui est décrit ci-dessus</li>
-</ul>
+    <h2>Comment ça marche</h2>
+    <div class="gestures">
+      <div class="gesture">
+        <h3>Créer</h3>
+        <p>Chaque studio produit une page du même carnet chronologique — un portfolio qu'on rouvre des années plus tard.</p>
+      </div>
+      <div class="gesture">
+        <h3>S'inspirer</h3>
+        <p>Une image de référence devient calque-modèle sous le dessin, réglable en opacité, sans quitter la toile.</p>
+      </div>
+      <div class="gesture">
+        <h3>Montrer</h3>
+        <p>Export PDF ou images soignées, projection à l'écran — le travail sort de l'appareil quand vous le décidez.</p>
+      </div>
+    </div>
 
-<h2>Vos droits</h2>
-<p>
-  Vous pouvez supprimer un carnet, ou l'ensemble de vos données, à tout moment
-  depuis l'application ; lorsqu'un carnet est synchronisé, cette suppression
-  efface aussi le fichier correspondant dans votre Google Drive. Vous pouvez
-  également retirer à Atelier l'accès à votre compte Google à tout moment depuis
-  les <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">paramètres de votre compte Google</a>.
-  Pour exercer un droit d'accès, de rectification ou pour toute autre question sur
-  vos données, vous pouvez nous contacter à l'adresse ci-dessous.
-</p>
+    <div class="cta-row">
+      <a class="cta" href="mailto:jeromehouix@gmail.com">Une question, une idée ? Écrire</a>
+    </div>
+  </div>
 
-<div class="contact">
-  <h2 style="margin-top:0">Contact</h2>
-  <p>
-    Pour toute question relative à cette politique de confidentialité ou à vos
-    données :<br>
-    <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
-  </p>
-</div>
+  <div data-lang-content="en">
+    <h1>A digital art studio</h1>
+    <p class="hero-tagline">
+      Draw, animate, compose: seven studios in one notebook, following a piece
+      from the first stroke to the finished work.
+    </p>
 
-</div>
+    <div class="studio-grid">
+      <a class="studio-card" href="tutorials/dessin.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <line x1="18" y1="47" x2="30" y2="12" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+          <line x1="84" y1="17" x2="70" y2="52" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+          <path d="M18 47 C30 12 70 52 84 17" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <circle cx="18" cy="47" r="3.4" fill="var(--card)" stroke="var(--accent)" stroke-width="1.4"/>
+          <circle cx="84" cy="17" r="3.4" fill="var(--card)" stroke="var(--accent)" stroke-width="1.4"/>
+          <rect x="27.5" y="9.5" width="5" height="5" fill="var(--accent)"/>
+          <rect x="67.5" y="49.5" width="5" height="5" fill="var(--accent)"/>
+        </svg>
+        <h2 class="studio-name">Drawing</h2>
+        <p class="studio-desc">Pencil, ink, marker, pastel and engraving brushes. Pen pressure, layers, palm rejection.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<div data-lang-content="en">
+      <a class="studio-card" href="tutorials/vectoriel.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="12" y="8" width="58" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+          <rect x="12" y="38" width="26" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+          <rect x="44" y="38" width="26" height="24" rx="6" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"/>
+        </svg>
+        <h2 class="studio-name">Vector</h2>
+        <p class="studio-desc">Flats, silhouettes, logos, pictograms. Clean shapes and boolean operations.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<h1>Privacy Policy — Atelier</h1>
-<p class="updated">Last updated: August 15, 2026</p>
+      <a class="studio-card" href="tutorials/pixel-art.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <g fill="var(--accent)">
+            <rect x="38" y="8" width="9" height="9"/><rect x="47" y="8" width="9" height="9"/>
+            <rect x="29" y="17" width="9" height="9"/><rect x="38" y="17" width="9" height="9" fill-opacity="0.35"/><rect x="47" y="17" width="9" height="9" fill-opacity="0.35"/><rect x="56" y="17" width="9" height="9"/>
+            <rect x="29" y="26" width="9" height="9"/><rect x="38" y="26" width="9" height="9"/><rect x="47" y="26" width="9" height="9"/><rect x="56" y="26" width="9" height="9"/>
+            <rect x="38" y="35" width="9" height="9"/><rect x="47" y="35" width="9" height="9"/>
+            <rect x="29" y="44" width="9" height="9"/><rect x="56" y="44" width="9" height="9"/>
+            <rect x="20" y="53" width="9" height="9"/><rect x="65" y="53" width="9" height="9"/>
+          </g>
+        </svg>
+        <h2 class="studio-name">Pixel art</h2>
+        <p class="studio-desc">Cell grid, dedicated tools, resolution and palette under control.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<p>
-  Atelier is a drawing and animation app. This page explains what data the app
-  uses and how.
-</p>
+      <a class="studio-card" href="tutorials/generatif.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <g fill="var(--accent)">
+            <path d="M50 6 L58 20 L42 20 Z" fill-opacity="0.85"/>
+            <path d="M34 32 L42 20 L26 20 Z" fill-opacity="0.6"/>
+            <path d="M66 32 L74 20 L58 20 Z" fill-opacity="0.6"/>
+            <path d="M50 32 L58 20 L42 20 Z" fill-opacity="0.35"/>
+            <path d="M18 58 L26 46 L10 46 Z" fill-opacity="0.45"/>
+            <path d="M50 58 L58 46 L42 46 Z" fill-opacity="0.45"/>
+            <path d="M82 58 L90 46 L74 46 Z" fill-opacity="0.45"/>
+          </g>
+        </svg>
+        <h2 class="studio-name">Generative</h2>
+        <p class="studio-desc">Fractals, motifs, procedural shapes. A seed, a rule, a composition.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<p>
-  Publisher: Jerome Houix — contact:
-  <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>.
-</p>
+      <a class="studio-card" href="tutorials/montage.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="10" y="26" width="80" height="14" rx="4" fill="var(--accent)" fill-opacity="0.18"/>
+          <rect x="14" y="28" width="22" height="10" rx="3" fill="var(--accent)" fill-opacity="0.55"/>
+          <rect x="40" y="28" width="18" height="10" rx="3" fill="var(--accent)" fill-opacity="0.75"/>
+          <rect x="62" y="28" width="14" height="10" rx="3" fill="var(--accent)"/>
+          <line x1="58" y1="14" x2="58" y2="50" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M54 14 L62 14 L58 22 Z" fill="var(--accent)"/>
+        </svg>
+        <h2 class="studio-name">Montage</h2>
+        <p class="studio-desc">Assembling clips, soundtrack, export — the notebook's editing bench.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<h2>What stays on your device only</h2>
-<p>
-  Your drawings, notebooks and projects are stored locally on your device.
-  Camera and photo library access is used only to import photos or images into a
-  notebook; this content is never transmitted to third parties or used for
-  advertising purposes. Atelier contains no advertising tracker and does not sell
-  any data.
-</p>
+      <a class="studio-card" href="tutorials/animation.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <circle cx="30" cy="34" r="17" fill="var(--accent)" fill-opacity="0.16"/>
+          <circle cx="42" cy="30" r="17" fill="var(--accent)" fill-opacity="0.38"/>
+          <circle cx="56" cy="34" r="17" fill="var(--accent)" fill-opacity="0.92"/>
+        </svg>
+        <h2 class="studio-name">Animation</h2>
+        <p class="studio-desc">Frame by frame, onion skin, variable FPS, 2D rig for posing.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
 
-<h2>Google account (optional sign-in)</h2>
-<p>
-  If you choose to sign in with a Google account, Atelier receives your email
-  address and account identifier through Google Sign-In, in order to link your
-  notebook to your account and enable synchronization across devices. This
-  sign-in is optional: the app works without an account, fully offline and
-  local.
-</p>
+      <a class="studio-card" href="tutorials/bd.html">
+        <svg class="studio-icon" viewBox="0 0 100 64" aria-hidden="true">
+          <rect x="12" y="8" width="76" height="22" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+          <rect x="12" y="36" width="34" height="20" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+          <rect x="54" y="36" width="34" height="20" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.8"/>
+        </svg>
+        <h2 class="studio-name">Comics</h2>
+        <p class="studio-desc">Multi-panel pages, speech bubbles, sound effects, speed lines.</p>
+      <span class="studio-link-hint">Tutorial &rarr;</span>
+      </a>
+    </div>
 
-<h2>Content synchronization (when signed in)</h2>
-<p>
-  When an account is linked, the content of your notebooks (drawings and
-  imported images) is synchronized to your own Google Drive, so it is available
-  on your other devices and protected against data loss. Atelier does not host
-  this content on infrastructure it owns: it stays stored in your Google
-  account, under your control. This content is never shared with third parties,
-  nor used for commercial or advertising purposes.
-</p>
+    <h2>How it works</h2>
+    <div class="gestures">
+      <div class="gesture">
+        <h3>Create</h3>
+        <p>Every studio produces a page in the same chronological notebook — a portfolio you reopen years later.</p>
+      </div>
+      <div class="gesture">
+        <h3>Draw inspiration</h3>
+        <p>A reference image becomes a locked model layer under your drawing, opacity adjustable, without leaving the canvas.</p>
+      </div>
+      <div class="gesture">
+        <h3>Show</h3>
+        <p>Polished PDF or image export, on-screen projection — the work leaves the device when you decide.</p>
+      </div>
+    </div>
 
-<h2>Third-party content (reference search)</h2>
-<p>
-  Searching for references in the app may display Pexels photos (Pexels
-  licence, free of charge) and artworks from the Metropolitan Museum of Art
-  (public domain / CC0, under that museum's Open Access program). Searching for
-  clips in the montage studio may display Pexels videos (same licence). These
-  searches only send the typed search terms, with no account data, to the
-  Pexels and Metropolitan Museum of Art services.
-</p>
+    <div class="cta-row">
+      <a class="cta" href="mailto:jeromehouix@gmail.com">Question or feedback? Write to us</a>
+    </div>
+  </div>
 
-<h2>Export and sharing</h2>
-<p>
-  Atelier does not publish or share your content outside the app
-  automatically. Exporting to PDF, image, or an .atelier package is an action
-  you trigger yourself, and the resulting file stays under your control.
-</p>
+</section>
 
-<h2>What Atelier does not do</h2>
-<ul>
-  <li>No advertising tracking or profiling</li>
-  <li>No selling or sharing of data with third parties for marketing purposes</li>
-  <li>No data collection beyond what is described above</li>
-</ul>
+<!-- ============ PRIVACY TAB ============ -->
+<section data-tab-panel="privacy">
 
-<h2>Your rights</h2>
-<p>
-  You can delete a notebook, or all of your data, at any time from within the
-  app; when a notebook is synchronized, this deletion also removes the
-  corresponding file from your Google Drive. You can also revoke Atelier's
-  access to your Google account at any time from your
-  <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google account settings</a>.
-  To exercise a right of access, rectification, or for any other question about
-  your data, you can contact us at the address below.
-</p>
+  <div data-lang-content="fr" class="active">
+    <h1>Politique de confidentialité — Atelier</h1>
+    <p class="updated">Dernière mise à jour : 15 août 2026</p>
 
-<div class="contact">
-  <h2 style="margin-top:0">Contact</h2>
-  <p>
-    For any question about this privacy policy or your data:<br>
-    <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
-  </p>
-</div>
+    <p>
+      Atelier est une application de dessin et d'animation. Cette page explique quelles
+      données sont utilisées par l'application et comment elles le sont.
+    </p>
+
+    <p>
+      Éditeur : Jerome Houix — contact :
+      <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>.
+    </p>
+
+    <h2>Ce qui reste uniquement sur votre appareil</h2>
+    <p>
+      Vos dessins, carnets et projets sont stockés localement sur votre appareil.
+      L'accès à la caméra et à la photothèque sert uniquement à importer des photos ou
+      des images dans un carnet ; ces contenus ne sont jamais transmis à des tiers ni
+      utilisés à des fins publicitaires. Atelier ne contient aucun traceur publicitaire
+      et ne revend aucune donnée.
+    </p>
+
+    <h2>Compte Google (connexion facultative)</h2>
+    <p>
+      Si vous choisissez de vous connecter avec un compte Google, Atelier reçoit votre
+      adresse e-mail et votre identifiant de compte via Google Sign-In, afin d'associer
+      votre carnet à votre compte et de permettre la synchronisation entre appareils.
+      Cette connexion est facultative : l'application fonctionne sans compte, en local
+      uniquement.
+    </p>
+
+    <h2>Synchronisation du contenu (si connecté)</h2>
+    <p>
+      Lorsqu'un compte est associé, le contenu de vos carnets (dessins et images
+      importées) est synchronisé vers votre propre Google Drive, afin d'être
+      disponible sur vos autres appareils et d'éviter la perte de données. Atelier
+      n'héberge pas ce contenu sur une infrastructure qui lui appartient : il reste
+      stocké dans votre compte Google, sous votre contrôle. Ce contenu n'est ni
+      partagé avec des tiers, ni utilisé à des fins commerciales ou publicitaires.
+    </p>
+
+    <h2>Contenus tiers (recherche de références)</h2>
+    <p>
+      La recherche de références dans l'application peut afficher des photos Pexels
+      (licence Pexels, gratuite) et des œuvres du Metropolitan Museum of Art (domaine
+      public / CC0, programme Open Access de ce musée). La recherche de plans dans le
+      montage peut afficher des vidéos Pexels (même licence). Ces recherches
+      transmettent uniquement les termes saisis, sans donnée de compte, aux services
+      Pexels et Metropolitan Museum of Art.
+    </p>
+
+    <h2>Export et partage</h2>
+    <p>
+      Atelier ne publie ni ne partage automatiquement votre contenu en dehors de
+      l'application. L'export en PDF, en image ou en paquet .atelier est une action
+      que vous déclenchez vous-même, et le fichier obtenu reste sous votre contrôle.
+    </p>
+
+    <h2>Ce qu'Atelier ne fait pas</h2>
+    <ul>
+      <li>Pas de suivi publicitaire ni de profilage</li>
+      <li>Pas de revente ou de partage de données avec des tiers à des fins marketing</li>
+      <li>Pas de collecte de données au-delà de ce qui est décrit ci-dessus</li>
+    </ul>
+
+    <h2>Vos droits</h2>
+    <p>
+      Vous pouvez supprimer un carnet, ou l'ensemble de vos données, à tout moment
+      depuis l'application ; lorsqu'un carnet est synchronisé, cette suppression
+      efface aussi le fichier correspondant dans votre Google Drive. Vous pouvez
+      également retirer à Atelier l'accès à votre compte Google à tout moment depuis
+      les <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">paramètres de votre compte Google</a>.
+      Pour exercer un droit d'accès, de rectification ou pour toute autre question sur
+      vos données, vous pouvez nous contacter à l'adresse ci-dessous.
+    </p>
+
+    <div class="contact">
+      <h2 style="margin-top:0">Contact</h2>
+      <p>
+        Pour toute question relative à cette politique de confidentialité ou à vos
+        données :<br>
+        <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
+      </p>
+    </div>
+  </div>
+
+  <div data-lang-content="en">
+    <h1>Privacy Policy — Atelier</h1>
+    <p class="updated">Last updated: August 15, 2026</p>
+
+    <p>
+      Atelier is a drawing and animation app. This page explains what data the app
+      uses and how.
+    </p>
+
+    <p>
+      Publisher: Jerome Houix — contact:
+      <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>.
+    </p>
+
+    <h2>What stays on your device only</h2>
+    <p>
+      Your drawings, notebooks and projects are stored locally on your device.
+      Camera and photo library access is used only to import photos or images into a
+      notebook; this content is never transmitted to third parties or used for
+      advertising purposes. Atelier contains no advertising tracker and does not sell
+      any data.
+    </p>
+
+    <h2>Google account (optional sign-in)</h2>
+    <p>
+      If you choose to sign in with a Google account, Atelier receives your email
+      address and account identifier through Google Sign-In, in order to link your
+      notebook to your account and enable synchronization across devices. This
+      sign-in is optional: the app works without an account, fully offline and
+      local.
+    </p>
+
+    <h2>Content synchronization (when signed in)</h2>
+    <p>
+      When an account is linked, the content of your notebooks (drawings and
+      imported images) is synchronized to your own Google Drive, so it is available
+      on your other devices and protected against data loss. Atelier does not host
+      this content on infrastructure it owns: it stays stored in your Google
+      account, under your control. This content is never shared with third parties,
+      nor used for commercial or advertising purposes.
+    </p>
+
+    <h2>Third-party content (reference search)</h2>
+    <p>
+      Searching for references in the app may display Pexels photos (Pexels
+      licence, free of charge) and artworks from the Metropolitan Museum of Art
+      (public domain / CC0, under that museum's Open Access program). Searching for
+      clips in the montage studio may display Pexels videos (same licence). These
+      searches only send the typed search terms, with no account data, to the
+      Pexels and Metropolitan Museum of Art services.
+    </p>
+
+    <h2>Export and sharing</h2>
+    <p>
+      Atelier does not publish or share your content outside the app
+      automatically. Exporting to PDF, image, or an .atelier package is an action
+      you trigger yourself, and the resulting file stays under your control.
+    </p>
+
+    <h2>What Atelier does not do</h2>
+    <ul>
+      <li>No advertising tracking or profiling</li>
+      <li>No selling or sharing of data with third parties for marketing purposes</li>
+      <li>No data collection beyond what is described above</li>
+    </ul>
+
+    <h2>Your rights</h2>
+    <p>
+      You can delete a notebook, or all of your data, at any time from within the
+      app; when a notebook is synchronized, this deletion also removes the
+      corresponding file from your Google Drive. You can also revoke Atelier's
+      access to your Google account at any time from your
+      <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google account settings</a>.
+      To exercise a right of access, rectification, or for any other question about
+      your data, you can contact us at the address below.
+    </p>
+
+    <div class="contact">
+      <h2 style="margin-top:0">Contact</h2>
+      <p>
+        For any question about this privacy policy or your data:<br>
+        <a href="mailto:jeromehouix@gmail.com">jeromehouix@gmail.com</a>
+      </p>
+    </div>
+  </div>
+
+</section>
 
 </div>
 
 <script>
 (function () {
-  var STORAGE_KEY = 'atelier-privacy-lang';
-  var buttons = document.querySelectorAll('[data-set-lang]');
-  var panels = document.querySelectorAll('[data-lang-content]');
+  var LANG_KEY = 'atelier-privacy-lang';
+  var TAB_KEY = 'atelier-privacy-tab';
+  var langButtons = document.querySelectorAll('[data-set-lang]');
+  var langPanels = document.querySelectorAll('[data-lang-content]');
+  var tabButtons = document.querySelectorAll('[data-set-tab]');
+  var tabPanels = document.querySelectorAll('[data-tab-panel]');
+  var currentLang = 'fr';
 
-  function applyLang(lang) {
-    panels.forEach(function (panel) {
-      panel.classList.toggle('active', panel.getAttribute('data-lang-content') === lang);
-    });
-    buttons.forEach(function (button) {
-      var isCurrent = button.getAttribute('data-set-lang') === lang;
-      button.setAttribute('aria-current', String(isCurrent));
-    });
-    document.documentElement.lang = lang;
-    document.title = lang === 'en' ? 'Atelier — Privacy Policy' : 'Atelier — Politique de confidentialité';
+  var TITLES = {
+    fr: { resources: 'Atelier — Ressources', privacy: 'Atelier — Politique de confidentialité' },
+    en: { resources: 'Atelier — Resources', privacy: 'Atelier — Privacy Policy' }
+  };
+
+  function currentTab() {
+    var active = document.querySelector('[data-tab-panel].active');
+    return active ? active.getAttribute('data-tab-panel') : 'resources';
   }
 
-  buttons.forEach(function (button) {
+  function applyLang(lang) {
+    currentLang = lang;
+    langPanels.forEach(function (panel) {
+      panel.classList.toggle('active', panel.getAttribute('data-lang-content') === lang);
+    });
+    langButtons.forEach(function (button) {
+      button.setAttribute('aria-current', String(button.getAttribute('data-set-lang') === lang));
+    });
+    tabButtons.forEach(function (button) {
+      var visible = button.getAttribute('data-lang-content') === lang;
+      button.style.display = visible ? '' : 'none';
+    });
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang][currentTab()];
+  }
+
+  function applyTab(tab) {
+    tabPanels.forEach(function (panel) {
+      panel.classList.toggle('active', panel.getAttribute('data-tab-panel') === tab);
+    });
+    tabButtons.forEach(function (button) {
+      button.setAttribute('aria-selected', String(button.getAttribute('data-set-tab') === tab));
+    });
+    document.title = TITLES[currentLang][tab];
+  }
+
+  langButtons.forEach(function (button) {
     button.addEventListener('click', function () {
       var lang = button.getAttribute('data-set-lang');
-      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
       applyLang(lang);
     });
   });
 
-  var saved = null;
-  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  if (!saved) {
-    saved = (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  tabButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var tab = button.getAttribute('data-set-tab');
+      try { localStorage.setItem(TAB_KEY, tab); } catch (e) {}
+      applyTab(tab);
+    });
+  });
+
+  var savedLang = null;
+  try { savedLang = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (!savedLang) {
+    savedLang = (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
   }
-  applyLang(saved);
+  applyLang(savedLang);
+
+  var savedTab = null;
+  try { savedTab = localStorage.getItem(TAB_KEY); } catch (e) {}
+  applyTab(savedTab === 'privacy' ? 'privacy' : 'resources');
 })();
 </script>
 

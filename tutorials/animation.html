@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier — Animation</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --accent: #4F7CA8;
+    --accent-ink: #3A5E80;
+    --shell: #F3F0EA;
+    --on-shell: #2A2724;
+    --on-shell-muted: #6B655D;
+    --card: #FFFCF7;
+    --on-card: #2A2724;
+    --card-border: rgba(42,39,36,0.10);
+    --canvas: #F7F4EF;
+    --focus-ring: #4F7CA8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --accent: #E27C50;
+      --accent-ink: #F0A17C;
+      --shell: #3A322C;
+      --on-shell: #F2EAE2;
+      --on-shell-muted: #C9BFB4;
+      --card: #453B33;
+      --on-card: #F2EAE2;
+      --card-border: rgba(242,234,226,0.12);
+      --canvas: #4E443C;
+      --focus-ring: #F0A17C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --accent: #E27C50;
+    --accent-ink: #F0A17C;
+    --shell: #3A322C;
+    --on-shell: #F2EAE2;
+    --on-shell-muted: #C9BFB4;
+    --card: #453B33;
+    --on-card: #F2EAE2;
+    --card-border: rgba(242,234,226,0.12);
+    --canvas: #4E443C;
+    --focus-ring: #F0A17C;
+  }
+
+  * { box-sizing: border-box; }
+
+  @font-face {
+    font-family: 'Kalam';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: local('Kalam Bold'), local('Kalam-Bold');
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--on-shell);
+    background: var(--shell);
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent-ink); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .page {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4.5rem;
+  }
+
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    flex: none;
+  }
+
+  .brand-name {
+    font-family: 'Kalam', -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .back-link {
+    font-size: 0.88rem;
+    color: var(--on-shell-muted);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--on-shell); }
+
+  .studio-hero {
+    background: var(--card);
+    color: var(--on-card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem 1.75rem;
+    box-shadow: 0 8px 22px -12px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.10);
+    margin-bottom: 2rem;
+  }
+
+  .studio-hero-icon {
+    width: 96px;
+    height: 62px;
+    margin-bottom: 1rem;
+  }
+
+  h1 { font-size: 1.5rem; margin: 0 0 0.4rem; text-wrap: balance; }
+  .lead { color: var(--on-shell-muted); margin: 0 0 0; max-width: 52ch; }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent-ink);
+    margin-bottom: 1.1rem;
+  }
+  .status-pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #FFFCF7;
+    text-decoration: none;
+  }
+  .cta.secondary {
+    background: transparent;
+    color: var(--on-shell);
+    border: 1px solid var(--card-border);
+  }
+
+  [data-lang-content] { display: none; }
+  [data-lang-content].active { display: block; }
+
+  .lang-switch {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .lang-switch button {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: transparent;
+    color: var(--on-shell-muted);
+    cursor: pointer;
+  }
+  .lang-switch button[aria-current="true"] {
+    background: var(--card);
+    color: var(--on-card);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <a class="brand" href="../index.html">
+    <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 30 Q13 8 20 8 Q27 8 27 16 Q27 22 20 22" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <line x1="8" y1="30" x2="13" y2="15" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="20" y1="22" x2="27" y2="16" stroke="var(--accent)" stroke-width="1" opacity="0.45"/>
+      <circle cx="8" cy="30" r="2.6" fill="var(--canvas)" stroke="var(--accent)" stroke-width="1.4"/>
+      <rect x="17.5" y="19.5" width="5" height="5" fill="var(--accent)"/>
+    </svg>
+    <span class="brand-name">Atelier</span>
+  </a>
+  <nav class="lang-switch">
+    <button type="button" data-set-lang="fr" aria-current="true">Français</button>
+    <button type="button" data-set-lang="en" aria-current="false">English</button>
+  </nav>
+</header>
+
+<div data-lang-content="fr" class="active">
+  <a class="back-link" href="../index.html">&larr; Retour aux ressources</a>
+
+  <div class="studio-hero" style="margin-top:1.25rem">
+    <svg class="studio-hero-icon" viewBox="0 0 100 64" aria-hidden="true">
+      <circle cx="30" cy="34" r="17" fill="var(--accent)" fill-opacity="0.16"/>
+          <circle cx="42" cy="30" r="17" fill="var(--accent)" fill-opacity="0.38"/>
+          <circle cx="56" cy="34" r="17" fill="var(--accent)" fill-opacity="0.92"/>
+    </svg>
+    <span class="status-pill">Tutoriel à venir</span>
+    <h1>Animation</h1>
+    <p class="lead">Image par image, onion skin, FPS variable, rig 2D pour les poses.</p>
+  </div>
+
+  <p class="lead">
+    Le tutoriel du studio Animation est en préparation. En attendant, vous
+    pouvez explorer l'outil directement dans l'application, ou nous écrire si
+    vous avez une question précise.
+  </p>
+
+  <div class="cta-row">
+    <a class="cta" href="mailto:jeromehouix@gmail.com?subject=Question%20Animation">Poser une question</a>
+    <a class="cta secondary" href="../index.html">Voir les autres studios</a>
+  </div>
+</div>
+
+<div data-lang-content="en">
+  <a class="back-link" href="../index.html">&larr; Back to resources</a>
+
+  <div class="studio-hero" style="margin-top:1.25rem">
+    <svg class="studio-hero-icon" viewBox="0 0 100 64" aria-hidden="true">
+      <circle cx="30" cy="34" r="17" fill="var(--accent)" fill-opacity="0.16"/>
+          <circle cx="42" cy="30" r="17" fill="var(--accent)" fill-opacity="0.38"/>
+          <circle cx="56" cy="34" r="17" fill="var(--accent)" fill-opacity="0.92"/>
+    </svg>
+    <span class="status-pill">Tutorial coming soon</span>
+    <h1>Animation</h1>
+    <p class="lead">Frame by frame, onion skin, variable FPS, 2D rig for posing.</p>
+  </div>
+
+  <p class="lead">
+    The Animation studio tutorial is being written. In the meantime, feel
+    free to explore the tool directly in the app, or write to us with any
+    specific question.
+  </p>
+
+  <div class="cta-row">
+    <a class="cta" href="mailto:jeromehouix@gmail.com?subject=Question%20Animation">Ask a question</a>
+    <a class="cta secondary" href="../index.html">See other studios</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var LANG_KEY = 'atelier-privacy-lang';
+  var buttons = document.querySelectorAll('[data-set-lang]');
+  var panels = document.querySelectorAll('[data-lang-content]');
+
+  var TITLES = {
+    fr: document.title,
+    en: 'Atelier — Animation'
+  };
+
+  function applyLang(lang) {
+    panels.forEach(function (panel) {
+      panel.classList.toggle('active', panel.getAttribute('data-lang-content') === lang);
+    });
+    buttons.forEach(function (button) {
+      button.setAttribute('aria-current', String(button.getAttribute('data-set-lang') === lang));
+    });
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang];
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var lang = button.getAttribute('data-set-lang');
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+      applyLang(lang);
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (!saved) {
+    saved = (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  }
+  applyLang(saved);
+})();
+</script>
+
+</body>
+</html>
